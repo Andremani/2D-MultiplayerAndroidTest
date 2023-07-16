@@ -7,15 +7,16 @@ namespace Andremani.TwoDMultiplayerAndroidTest
     public class ShootingSystem : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private GameObject owner;
         [SerializeField] private Transform projectileSpawningPoint;
         [SerializeField] private Transform projectilesParent;
         [SerializeField] private Projectile projectilePrefab;
-        [SerializeField] private Joystick shootingJoystick;
         [Header("Options")]
         [SerializeField] private float shootingCooldown = 0.5f;
+
+        private GameObject owner;
+        private PlayerInput input;
         private bool isShootingRoutineRunning;
-        private bool canShoot = true;
+        private bool canShoot;
 
         public bool CanShoot 
         { 
@@ -29,9 +30,18 @@ namespace Andremani.TwoDMultiplayerAndroidTest
                 }
             }
         }
-
-        private void Start()
+        private void Awake()
         {
+            canShoot = false;
+        }
+
+        public void Init(PlayerInput input, Player player)
+        {
+            owner = player.gameObject;
+
+            this.input = input;
+            canShoot = true;
+
             StartCoroutine(ShootingRoutine());
         }
 
@@ -40,7 +50,7 @@ namespace Andremani.TwoDMultiplayerAndroidTest
             isShootingRoutineRunning = true;
             while (CanShoot)
             {
-                yield return new WaitUntil(() => shootingJoystick.Direction != Vector2.zero);
+                yield return new WaitUntil(() => input.ShootingDirection != Vector2.zero);
                 if (CanShoot)
                 {
                     Shoot();

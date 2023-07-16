@@ -6,8 +6,10 @@ namespace Andremani.TwoDMultiplayerAndroidTest
 {
     public class Projectile : MonoBehaviour
     {
+        [Header("Options")]
         [SerializeField] private float speed = 5f;
-        public GameObject Owner {get; set;}
+        
+        public GameObject Owner { get; set; }
 
         void Update()
         {
@@ -20,7 +22,7 @@ namespace Andremani.TwoDMultiplayerAndroidTest
             if (Owner != collision.gameObject)
             {
                 Destroy(gameObject);
-                Debug.Log("Hit");
+                //Debug.Log("Hit");
             }
         }
     }

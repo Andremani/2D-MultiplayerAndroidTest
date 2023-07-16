@@ -6,19 +6,31 @@ namespace Andremani.TwoDMultiplayerAndroidTest
 {
     public class PlayerOrientation : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private Transform playerVisuals;
         [SerializeField] private Transform weaponHolder;
         [SerializeField] private Transform weapon;
         [SerializeField] private SpriteRenderer weaponRenderer;
-        [SerializeField] private Joystick playerRotationJoystick;
 
+        private PlayerInput input;
         private Vector2 lastDirection;
+
+        private void Awake()
+        {
+            enabled = false;
+        }
+
+        public void Init(PlayerInput input)
+        {
+            this.input = input;
+            enabled = true;
+        }
 
         private void Update()
         {
-            if (playerRotationJoystick.Direction != Vector2.zero)
+            if (input.ViewDirection != Vector2.zero)
             {
-                lastDirection = playerRotationJoystick.Direction;
+                lastDirection = input.ViewDirection;
             }
 
             FlipCheck();
