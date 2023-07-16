@@ -6,8 +6,9 @@ namespace Andremani.TwoDMultiplayerAndroidTest
 {
     public class PlayerOrientation : MonoBehaviour
     {
-        [SerializeField] private Transform gameObjectToFlip;
+        [SerializeField] private Transform playerVisuals;
         [SerializeField] private Transform weaponHolder;
+        [SerializeField] private Transform weapon;
         [SerializeField] private SpriteRenderer weaponRenderer;
         [SerializeField] private Joystick playerRotationJoystick;
 
@@ -29,14 +30,14 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         {
             if (lastDirection.x >= 0)
             {
-                if (gameObjectToFlip.localScale.x < 0)
+                if (playerVisuals.localScale.x < 0)
                 {
                     FlipPlayer();
                 }
             }
             else
             {
-                if (gameObjectToFlip.localScale.x > 0)
+                if (playerVisuals.localScale.x > 0)
                 {
                     FlipPlayer();
                 }
@@ -45,9 +46,13 @@ namespace Andremani.TwoDMultiplayerAndroidTest
 
         private void FlipPlayer()
         {
-            FlipByScaleX(gameObjectToFlip);
+            FlipByScaleX(playerVisuals);
             FlipPositionX(weaponHolder);
-            weaponRenderer.flipY = !weaponRenderer.flipY;
+            //weaponRenderer.flipY = !weaponRenderer.flipY;
+
+            Vector3 tempScale = weaponHolder.localScale;
+            tempScale.y = -tempScale.y;
+            weaponHolder.localScale = tempScale;
         }
 
         private void FlipByScaleX(Transform transformToFlip)
