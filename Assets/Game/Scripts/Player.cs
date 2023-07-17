@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Andremani.TwoDMultiplayerAndroidTest.PlayerSystems;
 
 namespace Andremani.TwoDMultiplayerAndroidTest
 {
@@ -11,6 +12,8 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         [SerializeField] private PlayerOrientation playerOrientation;
         [SerializeField] private ShootingSystem shootingSystem;
         [SerializeField] private CollectablesSystem collectablesSystem;
+
+        [field: SerializeField] public HealthSystem HealthSystem { get; private set; }
 
         void Start()
         {

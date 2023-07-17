@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Andremani.TwoDMultiplayerAndroidTest.Utility;
 
-namespace Andremani.TwoDMultiplayerAndroidTest
+namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
 {
     public class PlayerMovementController : MonoBehaviour
     {

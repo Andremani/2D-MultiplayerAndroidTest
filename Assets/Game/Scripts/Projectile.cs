@@ -8,6 +8,7 @@ namespace Andremani.TwoDMultiplayerAndroidTest
     {
         [Header("Options")]
         [SerializeField] private float speed = 5f;
+        [SerializeField] private float damage = 30f;
         
         public GameObject Owner { get; set; }
 
@@ -23,6 +24,14 @@ namespace Andremani.TwoDMultiplayerAndroidTest
             {
                 Destroy(gameObject);
                 //Debug.Log("Hit");
+
+                if(collision.gameObject.TryGetComponent<Player>(out Player collidedPlayer))
+                {
+                    if(collidedPlayer.HealthSystem != null)
+                    {
+                        collidedPlayer.HealthSystem.RecieveDamage(damage);
+                    }
+                }
             }
         }
     }

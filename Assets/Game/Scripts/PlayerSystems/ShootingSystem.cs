@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Andremani.TwoDMultiplayerAndroidTest
+namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
 {
     public class ShootingSystem : MonoBehaviour
     {

@@ -2259,6 +2259,7 @@ MonoBehaviour:
   playerOrientation: {fileID: 1956872280}
   shootingSystem: {fileID: 1956872278}
   collectablesSystem: {fileID: 1956872283}
+  <HealthSystem>k__BackingField: {fileID: 1956872284}
 --- !u!1001 &1323147558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3308,7 +3309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectablesSystem: {fileID: 1956872283}
+  healthSystem: {fileID: 1956872284}
   coinsBar: {fileID: 1980845161}
+  healthBar: {fileID: 714117369}
   coinsBarCapacity: 10
 --- !u!1001 &1701302183
 PrefabInstance:
@@ -4019,6 +4022,7 @@ GameObject:
   - component: {fileID: 1956872280}
   - component: {fileID: 1956872278}
   - component: {fileID: 1956872283}
+  - component: {fileID: 1956872284}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -4114,6 +4118,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerNotifier: {fileID: 673549300}
+--- !u!114 &1956872284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956872277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c059be50387b2644b4502d58bcf7a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1273743700}
+  maxHealth: 100
+  currentHealth: 100
 --- !u!1 &1980845159
 GameObject:
   m_ObjectHideFlags: 0

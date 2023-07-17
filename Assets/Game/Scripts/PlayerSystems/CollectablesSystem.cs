@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace Andremani.TwoDMultiplayerAndroidTest
+namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
 {
     public class CollectablesSystem : MonoBehaviour
     {
@@ -14,10 +14,10 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         public int Wealth 
         { 
             get { return wealth; } 
-            set { wealth = value; OnWealthChanged?.Invoke(value); } 
+            set { wealth = value; OnWealthChange?.Invoke(value); } 
         }
 
-        public event Action<int> OnWealthChanged;
+        public event Action<int> OnWealthChange;
 
         void Start()
         {
