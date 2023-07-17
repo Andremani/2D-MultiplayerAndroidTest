@@ -10,6 +10,7 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerOrientation playerOrientation;
         [SerializeField] private ShootingSystem shootingSystem;
+        [SerializeField] private CollectablesSystem collectablesSystem;
 
         void Start()
         {

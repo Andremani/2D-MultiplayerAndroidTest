@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Andremani.TwoDMultiplayerAndroidTest
 {
@@ -9,6 +10,14 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         [SerializeField] private TriggerNotifier triggerNotifier;
 
         private int wealth;
+
+        public int Wealth 
+        { 
+            get { return wealth; } 
+            set { wealth = value; OnWealthChanged?.Invoke(value); } 
+        }
+
+        public event Action<int> OnWealthChanged;
 
         void Start()
         {
@@ -19,10 +28,10 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         {
             if(otherCollider.TryGetComponent<Coin>(out Coin coin))
             {
-                wealth += coin.Value;
+                Wealth += coin.Value;
                 coin.Disappear();
 
-                Debug.Log(wealth);
+                //Debug.Log("Coins: "+ Wealth);
             }
         }
     }
