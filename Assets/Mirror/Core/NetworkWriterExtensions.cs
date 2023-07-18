@@ -239,7 +239,8 @@ namespace Mirror
                 writer.WriteUInt(0);
                 return;
             }
-            if (value.TryGetComponent(out NetworkIdentity identity))
+            NetworkIdentity identity = value.GetComponentInParent<NetworkIdentity>();
+            if (identity != null)
             {
                 writer.WriteUInt(identity.netId);
             }
@@ -258,8 +259,9 @@ namespace Mirror
                 return;
             }
 
+            NetworkIdentity identity = value.GetComponentInParent<NetworkIdentity>();
             // warn if the GameObject doesn't have a NetworkIdentity,
-            if (!value.TryGetComponent(out NetworkIdentity identity))
+            if (identity == null)
                 Debug.LogWarning($"NetworkWriter {value} has no NetworkIdentity");
 
             // serialize the correct amount of data in any case to make sure

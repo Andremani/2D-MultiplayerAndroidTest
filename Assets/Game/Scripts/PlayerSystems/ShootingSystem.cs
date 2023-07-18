@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
 {
-    public class ShootingSystem : MonoBehaviour
+    public class ShootingSystem : NetworkBehaviour
     {
         [Header("References")]
         [SerializeField] private Transform projectileSpawningPoint;
@@ -35,8 +36,12 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
             canShoot = false;
         }
 
+        [ClientCallback]
         public void Init(PlayerInput input, Player player)
         {
+            if (!isLocalPlayer)
+            { return; }
+
             owner = player.gameObject;
 
             this.input = input;
@@ -45,6 +50,7 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
             StartCoroutine(ShootingRoutine());
         }
 
+        [Client]
         private IEnumerator ShootingRoutine()
         {
             isShootingRoutineRunning = true;
@@ -53,17 +59,20 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
                 yield return new WaitUntil(() => input.ShootingDirection != Vector2.zero);
                 if (CanShoot)
                 {
-                    Shoot();
+                    CmdShoot();
                 }
                 yield return new WaitForSeconds(shootingCooldown);
             }
             isShootingRoutineRunning = false;
         }
 
-        private void Shoot()
+        [Command]
+        private void CmdShoot()
         {
             Projectile projectile = Instantiate(projectilePrefab, projectileSpawningPoint.position, projectileSpawningPoint.rotation, projectilesParent);
             projectile.Owner = owner;
+
+            NetworkServer.Spawn(projectile.gameObject);
         }
     }
 }

@@ -2,19 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Mirror;
 
 namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
 {
-    public class CollectablesSystem : MonoBehaviour
+    public class CollectablesSystem : NetworkBehaviour
     {
         [SerializeField] private TriggerNotifier triggerNotifier;
 
+        [SyncVar(hook = nameof(OnWealthChangeHook))]
         private int wealth;
 
         public int Wealth 
         { 
-            get { return wealth; } 
-            set { wealth = value; OnWealthChange?.Invoke(value); } 
+            get { return wealth; }
+            [Server]
+            private set 
+            { 
+                wealth = value; 
+                if(isServerOnly)
+                {
+                    OnWealthChange?.Invoke(value);
+                }
+            }
         }
 
         public event Action<int> OnWealthChange;
@@ -28,11 +38,20 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
         {
             if(otherCollider.TryGetComponent<Coin>(out Coin coin))
             {
-                Wealth += coin.Value;
-                coin.Disappear();
+                if(isServer)
+                {
+                    wealth += coin.Value;
+                    //Debug.Log("Coins: "+ Wealth);
+                }
 
-                //Debug.Log("Coins: "+ Wealth);
+                coin.Disappear();
             }
+        }
+
+        [Client]
+        private void OnWealthChangeHook(int oldWealth, int newWealth)
+        {
+            OnWealthChange?.Invoke(newWealth);
         }
     }
 }

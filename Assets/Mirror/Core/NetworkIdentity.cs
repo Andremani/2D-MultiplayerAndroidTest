@@ -294,7 +294,7 @@ namespace Mirror
         {
             // Get all NetworkBehaviours
             // (never null. GetComponents returns [] if none found)
-            NetworkBehaviours = GetComponents<NetworkBehaviour>();
+            NetworkBehaviours = GetComponentsInChildren<NetworkBehaviour>();
             ValidateComponents();
 
             // initialize each one

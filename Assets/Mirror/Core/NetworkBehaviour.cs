@@ -20,7 +20,8 @@ namespace Mirror
 
     /// <summary>Base class for networked components.</summary>
     [AddComponentMenu("")]
-    [RequireComponent(typeof(NetworkIdentity))]
+    //Commented - check for required NetworkIdentity moved to Awake (check for this and parenting GO components)
+    //[RequireComponent(typeof(NetworkIdentity))]
     [HelpURL("https://mirror-networking.gitbook.io/docs/guides/networkbehaviour")]
     public abstract class NetworkBehaviour : MonoBehaviour
     {
@@ -1318,5 +1319,14 @@ namespace Mirror
 
         /// <summary>Stop event, only called for objects the client has authority over.</summary>
         public virtual void OnStopAuthority() {}
+
+        //protected virtual void Awake() 
+        //{
+        //    NetworkIdentity networkIdentity = GetComponentInParent<NetworkIdentity>();
+        //    if(networkIdentity == null)
+        //    {
+        //        Debug.LogError("No NetworkIdentity for NetworkBehavior in hierarchy! It must be present at the top of it");
+        //    }
+        //}
     }
 }

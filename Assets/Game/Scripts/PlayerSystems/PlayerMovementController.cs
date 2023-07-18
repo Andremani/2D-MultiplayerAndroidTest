@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 using Andremani.TwoDMultiplayerAndroidTest.Utility;
 
 namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
 {
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovementController : NetworkBehaviour
     {
         [Header("References")]
         [SerializeField] private Rigidbody2D rb;
@@ -19,14 +20,22 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
             enabled = false;
         }
 
+        [ClientCallback]
         public void Init(PlayerInput input)
         {
+            if (!isLocalPlayer)
+            { return; }
+
             this.input = input;
             enabled = true;
         }
 
+        [ClientCallback]
         void Update()
         {
+            if (!isLocalPlayer)
+            { return; }
+
             Vector2 inputVector = input.MovementInput;
             Vector2 direction = inputVector.normalized;
 
