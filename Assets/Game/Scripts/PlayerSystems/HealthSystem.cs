@@ -41,6 +41,7 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
         }
 
         public event Action<float> OnHealthChange;
+        public event Action<Player> OnDeath;
 
         [Server]
         public void RecieveDamage(float damage)
@@ -66,7 +67,7 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
         [Server]
         private void Death()
         {
-            //check of game over conditions
+            OnDeath?.Invoke(player);
             RpcOnDeath();
         }
 
