@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 namespace Andremani.TwoDMultiplayerAndroidTest.Utility
 {
-    public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
+    public abstract class NetworkSingleton<T> : NetworkBehaviour where T : NetworkSingleton<T>
     {
         private static T instance;
 

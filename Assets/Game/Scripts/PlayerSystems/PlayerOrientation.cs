@@ -91,12 +91,12 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
         private void CmdFlipPlayer()
         {
             RpcFlipPlayer();
-        }
 
-        [ClientRpc(includeOwner = false)]
-        private void RpcFlipPlayer()
-        {
-            FlipPlayer();
+            [ClientRpc(includeOwner = false)]
+            void RpcFlipPlayer()
+            {
+                FlipPlayer();
+            }
         }
 
         [Client]
@@ -133,12 +133,12 @@ namespace Andremani.TwoDMultiplayerAndroidTest.PlayerSystems
         private void CmdChangeWeaponSortingLayer(int newSortingLayer)
         {
             RpcChangeWeaponSortingLayer(newSortingLayer);
-        }
 
-        [ClientRpc(includeOwner = false)]
-        private void RpcChangeWeaponSortingLayer(int newSortingLayer)
-        {
-            weaponRenderer.sortingOrder = newSortingLayer;
+            [ClientRpc(includeOwner = false)]
+            void RpcChangeWeaponSortingLayer(int newSortingLayer)
+            {
+                weaponRenderer.sortingOrder = newSortingLayer;
+            }
         }
     }
 }

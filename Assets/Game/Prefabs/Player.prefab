@@ -1330,10 +1330,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77281a3c63875a64a8f14818e4430763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 3672458751696539150}
   collectablesSystem: {fileID: 3672458751046960897}
   healthSystem: {fileID: 3672458751046960902}
   coinsBar: {fileID: 3672458751087938355}
   healthBar: {fileID: 3672458750072903587}
+  nicknameTMP: {fileID: 3672458750876444526}
   coinsBarCapacity: 10
 --- !u!1 &3672458751460148297
 GameObject:

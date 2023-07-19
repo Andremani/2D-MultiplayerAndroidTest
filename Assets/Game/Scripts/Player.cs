@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
@@ -16,7 +16,7 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         [field: SerializeField] public CollectablesSystem CollectablesSystem { get; private set; }
         [field: SerializeField] public HealthSystem HealthSystem { get; private set; }
 
-        [SyncVar]
+        [SyncVar(hook = nameof(HookOnNicknameChange))]
         private string nickname;
         public string Nickname 
         { 
@@ -24,11 +24,19 @@ namespace Andremani.TwoDMultiplayerAndroidTest
             [Server] set { nickname = value; } 
         }
 
+        public event Action<string> OnNicknameChange;
+
         void Start()
         {
             MovementController.Init(PlayerInput);
             PlayerOrientation.Init(PlayerInput);
             ShootingSystem.Init(PlayerInput, this);
+        }
+
+        [Client]
+        private void HookOnNicknameChange(string oldNickname, string newNickname)
+        {
+            OnNicknameChange?.Invoke(newNickname);
         }
     }
 }
