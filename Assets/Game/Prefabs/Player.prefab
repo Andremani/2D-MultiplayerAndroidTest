@@ -1059,6 +1059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac0b80ad4550e64b9dd08051cdaf956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   rb: {fileID: 3672458751696539145}
   speed: 4
 --- !u!114 &3672458751046960898
@@ -1094,6 +1097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5c33c7f69f48a48a29583eced963f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   projectileSpawningPoint: {fileID: 3672458751780036362}
   projectilesParent: {fileID: 0}
   projectilePrefab: {fileID: 178965910745059074, guid: 83d2d654703a2ea499e66279b4170adb, type: 3}
@@ -1110,6 +1116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60138df984e816d4294f158dea547142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   triggerNotifier: {fileID: 3672458750048586926}
 --- !u!114 &3672458751046960902
 MonoBehaviour:
@@ -1123,6 +1132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c059be50387b2644b4502d58bcf7a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   player: {fileID: 3672458751696539150}
   maxHealth: 100
   currentHealth: 100
@@ -1561,11 +1573,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3a6d69be709934c9bf4003166bf813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 3672458751046960896}
-  movementController: {fileID: 3672458751046960899}
-  playerOrientation: {fileID: 3672458751046960898}
-  shootingSystem: {fileID: 3672458751046960908}
-  collectablesSystem: {fileID: 3672458751046960897}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  <PlayerInput>k__BackingField: {fileID: 3672458751046960896}
+  <MovementController>k__BackingField: {fileID: 3672458751046960899}
+  <PlayerOrientation>k__BackingField: {fileID: 3672458751046960898}
+  <ShootingSystem>k__BackingField: {fileID: 3672458751046960908}
+  <CollectablesSystem>k__BackingField: {fileID: 3672458751046960897}
   <HealthSystem>k__BackingField: {fileID: 3672458751046960902}
 --- !u!50 &3672458751696539145
 Rigidbody2D:
@@ -1810,6 +1825,10 @@ PrefabInstance:
     - target: {fileID: 868893870937953386, guid: 83d2d654703a2ea499e66279b4170adb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941878146695765036, guid: 83d2d654703a2ea499e66279b4170adb, type: 3}
+      propertyPath: _assetId
+      value: 706174401
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83d2d654703a2ea499e66279b4170adb, type: 3}
