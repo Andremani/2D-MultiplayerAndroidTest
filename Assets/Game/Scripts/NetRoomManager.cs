@@ -22,9 +22,14 @@ namespace Andremani.TwoDMultiplayerAndroidTest
     /// </summary>
     public class NetRoomManager : NetworkRoomManager
     {
+        //public readonly List<NetRoomPlayer> netRoomPlayers = new List<NetRoomPlayer>();
+
         public event Action<NetworkConnectionToClient, Player> OnServerAddedGamePlayer;
         public event Action<NetworkConnectionToClient> OnServerDisconnectedPlayer;
         public event Action OnLeaveMainGameScene;
+
+        public event Action OnClientConnectEvent;
+        public event Action OnClientDisconnectEvent;
 
         /// <summary>
         /// This allows customization of the creation of the GamePlayer object on the server.
@@ -71,8 +76,60 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         /// <param name="conn">The connection that disconnected.</param>
         public override void OnRoomServerDisconnect(NetworkConnectionToClient conn) 
         {
+            //NetRoomPlayer netRoomPlayer = conn.identity.GetComponent<NetRoomPlayer>();
+            //if(netRoomPlayer != null)
+            //{
+            //    if (netRoomPlayers.Contains(netRoomPlayer))
+            //    {
+            //        netRoomPlayers.Remove(netRoomPlayer);
+            //    }
+            //}
+            //else
+            //{
+            //    Debug.LogWarning("No NetRoomPlayer component while it should be here. Bad behaviour when disconnecting from GameScene");
+            //}
+            
             OnServerDisconnectedPlayer?.Invoke(conn);
         }
+
+        /// <summary>
+        /// This is called on the client when it connects to server.
+        /// </summary>
+        public override void OnRoomClientConnect() 
+        {
+            OnClientConnectEvent?.Invoke();
+        }
+
+        /// <summary>
+        /// This is called on the client when disconnected from a server.
+        /// </summary>
+        public override void OnRoomClientDisconnect()
+        {
+            OnClientDisconnectEvent?.Invoke();
+        }
+
+        /// <summary>
+        /// This allows customization of the creation of the room-player object on the server.
+        /// <para>By default the roomPlayerPrefab is used to create the room-player, but this function allows that behaviour to be customized.</para>
+        /// </summary>
+        /// <param name="conn">The connection the player object is for.</param>
+        /// <returns>The new room-player object.</returns>
+        //public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnectionToClient conn)
+        //{
+        //    GameObject newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);
+        //    if (!newRoomGameObject.TryGetComponent<NetRoomPlayer>(out NetRoomPlayer roomPlayer))
+        //    {
+        //        Debug.LogError("No NetRoomPlayer component attached to roomPlayer Prefab!");
+        //        return null;
+        //    }
+
+        //    if(!netRoomPlayers.Contains(roomPlayer))
+        //    {
+        //        netRoomPlayers.Add(roomPlayer);
+        //    }
+
+        //    return newRoomGameObject;
+        //}
 
         #region Server Callbacks
 
@@ -102,16 +159,8 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         /// <param name="conn">The new connection.</param>
         public override void OnRoomServerConnect(NetworkConnectionToClient conn) { }
 
-        /// <summary>
-        /// This allows customization of the creation of the room-player object on the server.
-        /// <para>By default the roomPlayerPrefab is used to create the room-player, but this function allows that behaviour to be customized.</para>
-        /// </summary>
-        /// <param name="conn">The connection the player object is for.</param>
-        /// <returns>The new room-player object.</returns>
-        public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnectionToClient conn)
-        {
-            return base.OnRoomServerCreateRoomPlayer(conn);
-        }
+        //public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnectionToClient conn)
+        //return base.OnRoomServerCreateRoomPlayer(conn);
 
         //OnRoomServerCreateGamePlayer
 
@@ -174,15 +223,9 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         /// </summary>
         public override void OnRoomClientExit() { }
 
-        /// <summary>
-        /// This is called on the client when it connects to server.
-        /// </summary>
-        public override void OnRoomClientConnect() { }
+        //public override void OnRoomClientConnect() { }
 
-        /// <summary>
-        /// This is called on the client when disconnected from a server.
-        /// </summary>
-        public override void OnRoomClientDisconnect() { }
+        //public override void OnRoomClientDisconnect() { }
 
         /// <summary>
         /// This is called on the client when a client is started.

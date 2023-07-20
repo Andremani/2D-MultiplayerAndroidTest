@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace Andremani.TwoDMultiplayerAndroidTest
+namespace Andremani.TwoDMultiplayerAndroidTest.UI
 {
     public class UIEndGamePanel : MonoBehaviour
     {

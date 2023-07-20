@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Andremani.TwoDMultiplayerAndroidTest.PlayerSystems;
 
-namespace Andremani.TwoDMultiplayerAndroidTest
+namespace Andremani.TwoDMultiplayerAndroidTest.UI
 {
     public class PlayerUI : MonoBehaviour
     {

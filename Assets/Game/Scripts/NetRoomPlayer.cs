@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using Andremani.TwoDMultiplayerAndroidTest.UI;
 
 namespace Andremani.TwoDMultiplayerAndroidTest
 {
@@ -25,9 +26,22 @@ namespace Andremani.TwoDMultiplayerAndroidTest
         /// </summary>
         public override void OnStartAuthority()
         {
-            Nickname = LobbyUI.nickname;
+            Nickname = NicknameInputUI.nickname;
+            CmdChangeNickname(NicknameInputUI.nickname);
         }
-        
+
+        [Command]
+        private void CmdChangeNickname(string newNickname)
+        {
+            Nickname = newNickname;
+        }
+
+        //[Command]
+        //public void CmdKickPlayer(NetRoomPlayer playerToKick)
+        //{
+        //    playerToKick.GetComponent<NetworkIdentity>().connectionToClient.Disconnect();
+        //}
+
         #region Start & Stop Callbacks
 
         /// <summary>
